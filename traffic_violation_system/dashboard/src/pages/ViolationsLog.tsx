@@ -23,7 +23,9 @@ const ViolationsLog: React.FC = () => {
   useEffect(() => {
     const fetchViolations = async () => {
       try {
-        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/violations?limit=100');
+        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/violations?limit=100', {
+          headers: { 'ngrok-skip-browser-warning': 'true' }
+        });
         const data = await response.json();
         setViolations(data);
       } catch (error) {

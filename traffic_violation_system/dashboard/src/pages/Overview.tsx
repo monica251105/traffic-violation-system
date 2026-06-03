@@ -32,7 +32,9 @@ const Overview: React.FC = () => {
     // Fetch stats from Flask backend
     const fetchStats = async () => {
       try {
-        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/stats');
+        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/stats', {
+          headers: { 'ngrok-skip-browser-warning': 'true' }
+        });
         const data = await response.json();
         setStats(data);
       } catch (error) {
@@ -49,7 +51,9 @@ const Overview: React.FC = () => {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/config');
+        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/config', {
+          headers: { 'ngrok-skip-browser-warning': 'true' }
+        });
         const data = await response.json();
         if (data.available_locations) {
           setAvailableLocations(data.available_locations);
@@ -80,7 +84,9 @@ const Overview: React.FC = () => {
     // Poll camera status every 3 seconds
     const fetchCameraStatus = async () => {
       try {
-        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/camera_status');
+        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/camera_status', {
+          headers: { 'ngrok-skip-browser-warning': 'true' }
+        });
         const data = await response.json();
         setCameraStatus(data);
       } catch (error) {
@@ -96,7 +102,10 @@ const Overview: React.FC = () => {
   const handleRefresh = useCallback(async () => {
     setRefreshing(true);
     try {
-      await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/refresh_camera', { method: 'POST' });
+      await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/refresh_camera', {
+        method: 'POST',
+        headers: { 'ngrok-skip-browser-warning': 'true' }
+      });
       // Force the img element to remount by changing key (re-establishes MJPEG stream)
       setFeedKey(prev => prev + 1);
     } catch (error) {
@@ -125,7 +134,7 @@ const Overview: React.FC = () => {
     try {
       await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/config', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
         body: JSON.stringify({ 
           source: finalSource,
           location_name: finalLocationName

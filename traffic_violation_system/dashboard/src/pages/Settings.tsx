@@ -13,7 +13,9 @@ const Settings: React.FC = () => {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/config');
+        const response = await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/config', {
+          headers: { 'ngrok-skip-browser-warning': 'true' }
+        });
         const data = await response.json();
         if (data.available_locations) {
           setAvailableLocations(data.available_locations);
@@ -72,7 +74,7 @@ const Settings: React.FC = () => {
     try {
       await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/config', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
         body: JSON.stringify({ 
           source: finalSource,
           location_name: finalLocationName

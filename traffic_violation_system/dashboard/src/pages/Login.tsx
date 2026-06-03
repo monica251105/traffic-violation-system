@@ -29,14 +29,17 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         try {
           await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/config', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
             body: JSON.stringify({ 
               source: 'demo',
               location_name: 'Mode Demo'
             })
           });
           // Call refresh_camera to force stream update
-          await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/refresh_camera', { method: 'POST' });
+          await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/refresh_camera', {
+            method: 'POST',
+            headers: { 'ngrok-skip-browser-warning': 'true' }
+          });
         } catch (error) {
           console.error("Failed to reset location:", error);
         }
