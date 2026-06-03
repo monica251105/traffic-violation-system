@@ -27,7 +27,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         
         // Reset backend to demo mode on fresh login
         try {
-          await fetch('http://localhost:5000/api/config', {
+          await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/config', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -36,7 +36,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             })
           });
           // Call refresh_camera to force stream update
-          await fetch('http://localhost:5000/api/refresh_camera', { method: 'POST' });
+          await fetch('https://perpetual-tug-theater.ngrok-free.dev/api/refresh_camera', { method: 'POST' });
         } catch (error) {
           console.error("Failed to reset location:", error);
         }

@@ -223,7 +223,7 @@ const Overview: React.FC = () => {
           <div className="video-wrapper">
             <img 
               key={feedKey}
-              src={`http://localhost:5000/api/video_feed?t=${feedKey}`}
+              src={`https://perpetual-tug-theater.ngrok-free.dev/api/video_feed?t=${feedKey}`}
               alt="Live Traffic Feed" 
               className="live-video-feed" 
               onError={(e) => {
