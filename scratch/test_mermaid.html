@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, flowchart: { curve: 'stepAfter' } });
+    </script>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        .mermaid {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mermaid Flowchart Test</h1>
+    <div class="mermaid">
+    flowchart TD
+        classDef startNode fill:#C2F0C2,stroke:#77B377,stroke-width:2px,color:#000;
+        classDef processNode fill:#AADBFF,stroke:#3FA4FF,stroke-width:2px,color:#000;
+        classDef decisionNode fill:#FFC170,stroke:#FF9224,stroke-width:2px,color:#000;
+        classDef endNode fill:#FFA085,stroke:#FF5733,stroke-width:2px,color:#000;
+        classDef invisible fill:none,stroke:none,color:transparent,width:0px,height:0px;
+
+        Start([Mulai Program]):::startNode --> Init[Inisialisasi Komponen]:::processNode
+        Init --> ReadSource{"Apakah frame baru<br>tersedia?"}:::decisionNode
+        
+        ReadSource -->|Ya| UpdateTL[Pembaruan Status Lampu]:::processNode
+        ReadSource -- Tidak --- Dummy1[" "]:::invisible
+        Dummy1 --> Cleanup[Rilis Sumber Video]:::processNode
+        
+        Cleanup --> End([Selesai]):::endNode
+    </div>
+</body>
+</html>
