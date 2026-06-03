@@ -28,7 +28,11 @@ from config.settings import Settings
 from main import _generate_demo_frame
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for the React frontend
+CORS(app, resources={r"/api/*": {
+    "origins": "*",
+    "allow_headers": ["Content-Type", "ngrok-skip-browser-warning", "Authorization"],
+    "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}})
 
 VIOLATIONS_DIR = "violations"
 IMAGES_DIR = os.path.join(VIOLATIONS_DIR, "images")
